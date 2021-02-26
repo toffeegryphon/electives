@@ -2,10 +2,15 @@ asgiref==3.3.1
 astroid==2.5
 coverage==5.4
 Django==3.1.7
+doq==0.6.4
 isort==5.7.0
+Jinja2==2.11.3
 lazy-object-proxy==1.5.2
+MarkupSafe==1.1.1
 mccabe==0.6.1
+parso==0.8.1
 pylint==2.7.1
+python-dotenv==0.15.0
 pytz==2021.1
 sqlparse==0.4.1
 toml==0.10.2
