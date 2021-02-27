@@ -1,5 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Course
+from .serializers import CourseSerializer
+from rest_framework import viewsets, permissions
 
-def index(request):
-    return HttpResponse("Hello World")
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
