@@ -3,6 +3,7 @@
 
 from django.core.management.base import BaseCommand, CommandError
 
+from courses import FILL_PRE, FILL_POST
 from courses.models import Course
 
 from csv import DictReader
@@ -52,7 +53,7 @@ class Command(BaseCommand):
         uid = ''
 
         # Subject Padding
-        uid += '#' * (4 - len(subject)) + subject
+        uid += FILL_PRE * (4 - len(subject)) + subject
 
         # Course Number
         uid += str(number)
@@ -78,7 +79,7 @@ class Command(BaseCommand):
             uid += '0' * (2 - len(str(sec_n))) + str(sec_n)
 
         # Unused values
-        uid += '0' * (10 - len(uid))
+        uid += FILL_POST * (10 - len(uid))
 
         return uid
 

@@ -1,5 +1,7 @@
 from django.db import models
 
+from . import FILL_PRE
+
 class Course(models.Model):
     # Unique ID, Major, Code, SectionTitle e.g. CS##498001
     uid = models.CharField(max_length = 10, unique = True, primary_key = True)
@@ -9,7 +11,7 @@ class Course(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        subject = self.uid[:4].strip('#')
+        subject = self.uid[:4].strip(FILL_PRE)
         number = self.uid[4:7]
         sec_t = ' ' + self.section_title if self.section_title else ''
         return f'{subject} {number}{sec_t}'
