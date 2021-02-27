@@ -6,6 +6,14 @@ General Idea: Directed Graph
 Nodes: Courses
 Edges: IsPrerequisite
 
+## To Build
+1. Git clone
+2. Generate your own secret key.
+3. Add secret key under SECRET\_KEY entry in .env (same dir as manage.py)
+4. Pip install from requirements.txt
+5. python3 manage.py runserver
+6. Visit localhost:8000/admin (may require creating own superuser first)
+
 === Course ===
 - int UID
 - str Title
