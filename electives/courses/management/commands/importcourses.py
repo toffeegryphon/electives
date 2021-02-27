@@ -52,7 +52,7 @@ class Command(BaseCommand):
         uid = ''
 
         # Subject Padding
-        uid += subject + '#' * (4 - len(subject))
+        uid += '#' * (4 - len(subject)) + subject
 
         # Course Number
         uid += str(number)
