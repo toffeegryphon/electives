@@ -10,6 +10,23 @@ class Course(models.Model):
     section_title = models.CharField(max_length = 300, unique = True, blank = True, null = True)
     description = models.TextField()
 
+    @property
+    def prereqs(self):
+        links = self.prerequisites.all().select_related()
+        tree = {}
+        for link in links:
+            if link.pid not in tree:
+                tree[link.pid] = []
+            tree[link.pid].append(link.to_dict())
+        return tree.values()
+    
+    def _prereqs(self) -> list:
+        return [[o['uid'] for o in ors] for ors in self.prereqs]
+
+    def is_allowed(self, *uids) -> bool:
+        # AND OR
+        pass
+
     def __str__(self):
         subject = self.uid[:4].strip(FILL_PRE)
         number = self.uid[4:7]
@@ -24,6 +41,12 @@ class Link(models.Model):
     target = models.ForeignKey(
         Course, related_name = 'prerequisites', on_delete = models.CASCADE
     )
+
+    def to_dict(self) -> dict:
+        # TODO Consider how to serialize
+        # Probably JSON of uid, string, and link:
+        p = self.prerequisite
+        return {'uid': p.uid, 'str': str(p)}
 
     def __str__(self):
         return f'{self.pid}: {str(self.prerequisite)} > {str(self.target)}'
