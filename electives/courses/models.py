@@ -1,3 +1,5 @@
+from typing import List, Set
+
 from django.db import models
 
 from . import FILL_PRE
@@ -20,12 +22,14 @@ class Course(models.Model):
             tree[link.pid].append(link.to_dict())
         return tree.values()
     
-    def _prereqs(self) -> list:
-        return [[o['uid'] for o in ors] for ors in self.prereqs]
+    def _prereqs(self) -> List[Set[str]]:
+        return [set(o['uid'] for o in ors) for ors in self.prereqs]
 
-    def is_allowed(self, *uids) -> bool:
+    # TODO High priority test
+    def is_allowed(self, uids: Set[str]) -> bool:
         # AND OR
-        pass
+        allowed = all([uids.intersection(ors) for ors in self._prereqs()])
+        return allowed
 
     def __str__(self):
         subject = self.uid[:4].strip(FILL_PRE)
