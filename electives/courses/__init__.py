@@ -3,3 +3,5 @@
 
 FILL_PRE = '@'
 FILL_POST = '0'
+
+QUERY_TAKEN = 'taken'
