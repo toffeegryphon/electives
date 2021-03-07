@@ -2,6 +2,7 @@ asgiref==3.3.1
 astroid==2.5
 coverage==5.4
 Django==3.1.7
+django-cors-headers==3.7.0
 djangorestframework==3.12.2
 doq==0.6.4
 isort==5.7.0
