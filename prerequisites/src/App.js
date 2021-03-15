@@ -17,7 +17,11 @@ export default class App extends Component {
       const response = await getCourse(query)
       this.setState({ course: response.data })
     } catch (err) {
-      alert(err)
+      // TODO Use axios.interceptors
+      if (err.response.status === 404) {
+      } else {
+        alert(err)
+      }
     }
   }
 
