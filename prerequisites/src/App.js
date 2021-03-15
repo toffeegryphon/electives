@@ -1,6 +1,7 @@
 import { Component } from 'react'
 
 import Search from './Search.js'
+import Taken from './Taken.js'
 import Course from './Course/Course.js'
 import { getCourse } from './Course/actions.js'
 
@@ -62,7 +63,7 @@ export default class App extends Component {
         }
         break
       case TYPE_DETAIL:
-        content = <Course course={this.state.course}/>
+        content = (<Course course={this.state.course}/>)
         break
       default:
         break
@@ -70,6 +71,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <Search search={this.search}/>
+        <Taken search={this.search}/>
         {content}
       </div>
     )
