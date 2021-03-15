@@ -6,6 +6,8 @@ from django.db.models import Q, Count
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import action
 
+# TODO Include search or something like if id is not length 10 try to parse as course
+
 class CourseViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Course.objects.all().order_by('uid')
     serializer_class = CourseSerializer
