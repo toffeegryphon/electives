@@ -44,4 +44,4 @@ class CourseViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
         # Return no prerequisites, or allowed
         query = Q(prerequisites__isnull=True) | Q(uid__in=uids)
 
-        return queryset.filter(query).distinct()
+        return queryset.exclude(uid__in=taken_uids).filter(query).distinct()
