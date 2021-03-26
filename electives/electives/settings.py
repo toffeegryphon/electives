@@ -28,9 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG', False)
 
-ALLOWED_HOSTS = ['toffeegryphon.pythonanywhere.com']
+if not DEBUG:
+    ALLOWED_HOSTS = ['toffeegryphon.pythonanywhere.com']
 
 
 # Application definition
@@ -143,8 +144,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://10.193.93.45:3000'
 ]
 
-# === SECURITY === #
 if not DEBUG:
+    # === SECURITY === #
     SECURE_HSTS_PRELOAD = True
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_SECONDS = 60
