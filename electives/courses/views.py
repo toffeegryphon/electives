@@ -1,16 +1,20 @@
 from typing import List, Set
 from . import QUERY_TAKEN
+from .filters import UIDSearchFilter
 from .models import Course
 from .serializers import CourseSerializer
 from django.db.models import Q, Count
 from rest_framework import viewsets, mixins
-from rest_framework.decorators import action
 
 # TODO Include search or something like if id is not length 10 try to parse as course
 
 class CourseViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Course.objects.all().order_by('uid')
     serializer_class = CourseSerializer
+
+    # Search
+    search_fields = ['uid']
+    filter_backends = (UIDSearchFilter,)
 
     def get_queryset(self):
         queryset = self.queryset
