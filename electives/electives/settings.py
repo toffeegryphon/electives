@@ -140,7 +140,8 @@ REST_FRAMEWORK = {
 # === CORS === #
 CORS_ALLOWED_ORIGINS = [
     # TODO Change to correct one after deployment!
-    'http://10.193.93.45:3000'
+    'http://10.193.93.45:3000',
+    'https://toffeegryphon.github.io'
 ]
 
 if not DEBUG:
