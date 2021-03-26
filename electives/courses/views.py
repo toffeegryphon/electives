@@ -20,7 +20,7 @@ class CourseViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
         queryset = self.queryset
         if self.action == 'list':
             taken_string = self.request.GET.get(QUERY_TAKEN)
-            if taken_string:
+            if taken_string is not None:
                 # TODO This definitely needs testing
                 taken_uids = set(taken_string.split(','))
                 queryset = self._filter_allowed(queryset, taken_uids)
