@@ -21,6 +21,9 @@ Edges: IsPrerequisite
 2. npm install
 3. npm start
 
+idea on visualization
+map style, click on a node to mark as taken, cool animation to show what can be taken next
+
 === Course ===
 - int UID
 - str Title
