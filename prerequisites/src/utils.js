@@ -19,3 +19,12 @@ export function parse(query) {
   return code
 }
 
+export function buildMeta(data) {
+  return {
+    // Should be called total, count for current size
+    count: data.count,
+    next: data.next,
+    previous: data.previous
+  }
+}
+

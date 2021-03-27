@@ -1,5 +1,6 @@
 import { Component } from 'react'
 
+import { buildMeta } from './utils.js'
 import Search from './Search.js'
 import Taken from './Taken.js'
 import Course from './Course/Course.js'
@@ -21,15 +22,6 @@ export default class App extends Component {
     }
   }
 
-  _buildMeta = (data) => {
-    return {
-      // Should be called total, count for current size
-      count: data.count,
-      next: data.next,
-      previous: data.previous
-    }
-  }
-
   search = async (query) => {
     try {
       const response = await getCourse(query)
@@ -39,7 +31,7 @@ export default class App extends Component {
         this.setState({ 
           type: TYPE_LIST, 
           courses: data.results, 
-          meta: this._buildMeta(data)
+          meta: buildMeta(data)
         })
       } else {
         this.setState({ type: TYPE_DETAIL, course: response.data })
