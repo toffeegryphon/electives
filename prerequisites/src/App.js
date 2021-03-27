@@ -4,7 +4,7 @@ import { buildMeta } from './utils.js'
 import Search from './Search.js'
 import Taken from './Taken.js'
 import Course from './Course/Course.js'
-import { getCourse } from './Course/actions.js'
+import { search as httpSearch, select as httpSelect } from './Course/actions.js'
 
 import './App.css'
 
@@ -24,8 +24,7 @@ export default class App extends Component {
 
   search = async (query) => {
     try {
-      const response = await getCourse(query)
-      const data = response.data
+      const data = await httpSearch(query)
       if ('count' in data) {
         // TODO should do merging
         this.setState({ 
@@ -34,8 +33,25 @@ export default class App extends Component {
           meta: buildMeta(data)
         })
       } else {
-        this.setState({ type: TYPE_DETAIL, course: response.data })
+        this.setState({ type: TYPE_DETAIL, course: data })
       }
+    } catch (err) {
+      // TODO Use axios.interceptors
+      if (err.response.status === 404) {
+      } else {
+        alert(err)
+      }
+    }
+  }
+
+  select = async (taken) => {
+    try {
+      const data = await httpSelect(taken)
+      this.setState({
+        type: TYPE_LIST,
+        courses: data.results,
+        meta: buildMeta(data)
+      })
     } catch (err) {
       // TODO Use axios.interceptors
       if (err.response.status === 404) {
@@ -51,7 +67,7 @@ export default class App extends Component {
       case TYPE_LIST:
         content = []
         for (const course of this.state.courses) {
-          content.push(<Course course={course}/>)
+          content.push(<Course key={course.uid} course={course}/>)
         }
         break
       case TYPE_DETAIL:
@@ -63,7 +79,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <Search search={this.search}/>
-        <Taken search={this.search}/>
+        <Taken search={this.select}/>
         {content}
       </div>
     )

@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { search } from './Course/actions.js'
 import TakenCourse from './TakenCourse.js'
 
-const QUERY_KW = '?taken='
+import './Taken.css'
 
 export default class Search extends Component {
   // TODO merge same, TODO Test backend handle multiple same, TODO delete, TODO clear
@@ -50,8 +50,7 @@ export default class Search extends Component {
   handleSearch = (event) => {
     // TODO Use params instead
     const uids = this.state.taken.map(course => course.uid)
-    const query = QUERY_KW + uids.join(',')
-    this.props.search(query)
+    this.props.search(uids)
   }
 
   handleKeyUp = (event) => {
@@ -78,8 +77,10 @@ export default class Search extends Component {
     <div onKeyUp={this.handleKeyUp}>
       <input type='text' value={this.state.query} onChange={this.handleChange}></input>
       <button onClick={this.handleAdd}>Add</button>
+      <span> course number of taken courses, then </span>
       <button onClick={this.handleSearch}>List</button>
-      {taken}
+      <span> courses you can take.</span>
+      <div className='container'>{taken}</div>
     </div>
   )}
 }

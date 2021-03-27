@@ -33,6 +33,7 @@ export default class Taken extends Component {
     <div onKeyUp={this.handleKeyUp}>
       <input type='text' value={this.state.query} onChange={this.handleChange}></input>
       <button onClick={this.handleSubmit}>Search</button>
+      <span> for details of a course by course number e.g. CS100</span>
     </div>
   )}
 }
