@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.header > div {
+  margin: 1%;
+  font-weight: bold;
+}
+
+.description {
+  margin: 0 2%;
+  text-align: justify;
+}

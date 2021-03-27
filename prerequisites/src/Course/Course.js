@@ -1,11 +1,17 @@
 import { Component } from 'react'
 
+import './Course.css'
+
 export default class Course extends Component {
   render() {
     return (
       <div>
-        <p>{this.props.course.name}</p>
-        <p>{this.props.course.description}</p>
+        <div className='header'>
+          <div>{this.props.course.did}</div>
+          <div>{this.props.course.name}</div>
+          <div>{this.props.course.section_title}</div>
+        </div>
+        <div className='description'>{this.props.course.description}</div>
       </div>
     )
   }
